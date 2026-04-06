@@ -1,5 +1,5 @@
 [package]
-name = "fints"
+name = "fints-rs"
 version = "0.1.0"
 edition = "2021"
 description = "Native Rust FinTS 3.0 PinTan client for German online banking"
@@ -7,6 +7,10 @@ license = "MIT"
 repository = "https://github.com/floffel/fints"
 keywords = ["fints", "hbci", "banking", "germany", "pintan"]
 categories = ["finance"]
+
+[lib]
+name = "fints"
+path = "src/lib.rs"
 
 [dependencies]
 reqwest = { version = "0.12", features = ["rustls-tls"], default-features = false }

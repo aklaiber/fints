@@ -1,4 +1,7 @@
-# fints
+# fints-rs
+
+[![crates.io](https://img.shields.io/crates/v/fints-rs.svg)](https://crates.io/crates/fints-rs)
+[![docs.rs](https://docs.rs/fints-rs/badge.svg)](https://docs.rs/fints-rs)
 
 A pure Rust implementation of the **FinTS 3.0** (formerly HBCI) banking protocol for German online banking.
 
@@ -21,13 +24,15 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-fints = { git = "https://github.com/floffel/fints" }
+fints-rs = "0.1"
 ```
+
+The crate is published as `fints-rs` on crates.io but the library name is `fints`, so all imports use `use fints::...`.
 
 ### CLI client
 
 ```bash
-cargo install --git https://github.com/floffel/fints --features cli
+cargo install fints-rs --features cli
 ```
 
 This installs the `fints-client` binary.
