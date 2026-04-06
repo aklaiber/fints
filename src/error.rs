@@ -1,0 +1,61 @@
+use thiserror::Error;
+
+/// Errors that can occur during FinTS operations.
+#[derive(Error, Debug)]
+pub enum FinTSError {
+    #[error("Parse error: {0}")]
+    Parse(String),
+
+    #[error("Serialization error: {0}")]
+    Serialize(String),
+
+    #[error("Transport error: {0}")]
+    Transport(String),
+
+    #[error("HTTP error (status {status}): {message}")]
+    Http { status: u16, message: String },
+
+    #[error("Dialog error: {0}")]
+    Dialog(String),
+
+    #[error("Authentication error: {0}")]
+    Auth(String),
+
+    #[error("TAN required but no TAN handler provided")]
+    TanRequired,
+
+    #[error("TAN rejected by bank: {0}")]
+    TanRejected(String),
+
+    #[error("TAN timeout: user did not confirm within the allowed time")]
+    TanTimeout,
+
+    #[error("Bank error ({kind:?}): {message}")]
+    BankError {
+        kind: crate::types::ResponseCodeKind,
+        message: String,
+    },
+
+    #[error("Segment not supported by bank: {0}")]
+    SegmentNotSupported(String),
+
+    #[error("Invalid response from bank: {0}")]
+    InvalidResponse(String),
+
+    #[error("MT940 parse error: {0}")]
+    Mt940(String),
+
+    #[error("PIN wrong")]
+    PinWrong,
+
+    #[error("Account locked")]
+    AccountLocked,
+
+    #[error("IO error: {0}")]
+    Io(#[from] std::io::Error),
+
+    #[error("Request error: {0}")]
+    Reqwest(#[from] reqwest::Error),
+}
+
+pub type Result<T> = std::result::Result<T, FinTSError>;
